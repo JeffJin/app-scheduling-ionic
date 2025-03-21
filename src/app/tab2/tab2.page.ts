@@ -1,5 +1,5 @@
 import { NgForOf } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   IonHeader,
   IonToolbar,
@@ -17,12 +17,29 @@ import { PhotoService } from '../services/photo.service';
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss'],
-  imports: [ IonHeader, IonToolbar, IonTitle, IonContent, ExploreContainerComponent, IonFab, IonFabButton, IonIcon, IonGrid, IonRow, IonCol, IonImg, NgForOf ]
+  imports: [
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonContent,
+    IonFab,
+    IonFabButton,
+    IonIcon,
+    IonGrid,
+    IonRow,
+    IonCol,
+    IonImg,
+    NgForOf
+  ]
 })
-export class Tab2Page {
+export class Tab2Page implements OnInit {
 
   constructor(public photoService: PhotoService) {
 
+  }
+
+  async ngOnInit() {
+    await this.photoService.loadSaved();
   }
 
   async addPhotoToGallery(): Promise<void> {
